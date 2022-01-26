@@ -2,19 +2,46 @@ import { batch, Component, createSignal } from "solid-js";
 import allowedWords from "./data/5-letter-allowed-words.json";
 import { Board } from "./Board";
 import { Keyboard } from "./Keyboard";
-import { createGameStore, getAnswer } from "./store";
+import { createGameStore, getAnswer, Store } from "./store";
+import { createPulse } from "./utils";
+
+function subscribeStoreToDocument(
+  store: Store,
+  { onRestart, onSubmit, onKey, onDelete }
+) {
+  document.addEventListener("keydown", (ev) => {
+    const key = ev.key.toLowerCase();
+    if (store.gameState !== "in-progress") {
+      if (key === "enter") {
+        onRestart();
+        return;
+      }
+    }
+    if (!store.answer) {
+      return;
+    }
+    if (key === "enter") {
+      onSubmit();
+      return;
+    }
+    if (key === "backspace") {
+      onDelete();
+      return;
+    }
+    onKey(key);
+  });
+}
 
 const App: Component = () => {
-  const [getShake, setShake] = createSignal(false);
-  function startShake() {
-    setShake(true);
-    setTimeout(() => setShake(false), 500);
-  }
+  const [getShake, startShake] = createPulse(500);
   const [store, setStore] = createGameStore(getAnswer());
   function onDelete() {
     setStore("input", (s) => s.slice(0, -1));
   }
   function onSubmit() {
+    if (store.gameState !== "in-progress") {
+      onRestart();
+    }
     if (store.input.length !== store.length) {
       return;
     }
@@ -44,29 +71,10 @@ const App: Component = () => {
     }
     setStore("input", (s) => [...s, key]);
   }
-  document.addEventListener("keydown", (ev) => {
-    const key = ev.key.toLowerCase();
-    if (store.gameState !== "in-progress") {
-      if (key === "enter") {
-        onRestart();
-        return;
-      }
-    }
-    if (!store.answer) {
-      return;
-    }
-    if (key === "enter") {
-      onSubmit();
-      return;
-    }
-    if (key === "backspace") {
-      onDelete();
-      return;
-    }
-    onKey(key);
-  });
+  subscribeStoreToDocument(store, { onDelete, onKey, onRestart, onSubmit });
   return (
     <div class="app">
+      <h1 class="heading">Stare</h1>
       <Board store={store} shake={getShake()} />
       {store.gameState === "won" ? <div>You won! Congratulations</div> : null}
       {store.gameState === "lost" ? (

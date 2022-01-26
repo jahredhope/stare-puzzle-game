@@ -4,6 +4,7 @@ import { Board } from "./Board";
 import { Keyboard } from "./Keyboard";
 import { createGameStore, getAnswer, Store } from "./store";
 import { createPulse } from "./utils";
+import { Header } from "./Header";
 
 function subscribeStoreToDocument(
   store: Store,
@@ -74,7 +75,7 @@ const App: Component = () => {
   subscribeStoreToDocument(store, { onDelete, onKey, onRestart, onSubmit });
   return (
     <div class="app">
-      <h1 class="heading">Stare</h1>
+      <Header />
       <Board store={store} shake={getShake()} />
       {store.gameState === "won" ? <div>You won! Congratulations</div> : null}
       {store.gameState === "lost" ? (

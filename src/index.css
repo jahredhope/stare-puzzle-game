@@ -9,7 +9,7 @@ body {
   color: white;
   background-color: #111111;
 
-  font-size: min(26px, 7vw);
+  font-size: min(26px, 8vw);
 }
 
 h1 {
@@ -151,7 +151,34 @@ h1 {
 
 .heading {
   color: #666666;
-  font-size: 1.2em;
-  align-self: flex-start;
+  font-size: 1.1em;
+  /* align-self: flex-start; */
   margin: -0.22em 0;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  align-self: flex-start;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 0.5em;
+  /* border-bottom: 1px solid; */
+}
+
+.info-icon {
+  height: 1.3em;
+  fill: #888888;
+}
+
+.help-page {
+  position: absolute;
+  background-color: #111111dd;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 2em;
+  font-size: 0.5em;
 }

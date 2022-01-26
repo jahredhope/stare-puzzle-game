@@ -1,4 +1,4 @@
-import { batch, Component, createSignal } from "solid-js";
+import { batch, Component } from "solid-js";
 import allowedWords from "./data/5-letter-allowed-words.json";
 import { Board } from "./Board";
 import { Keyboard } from "./Keyboard";

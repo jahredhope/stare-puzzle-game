@@ -42,6 +42,7 @@ export type SetStore = ReturnType<typeof createGameStore>[0];
 
 export function getAnswer() {
   const index = Math.floor(Math.random() * words.length);
+  console.log(words[index]);
   return words[index];
 }
 

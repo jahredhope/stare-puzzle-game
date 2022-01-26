@@ -17,7 +17,11 @@ const HelpPage: Component<{ hide: any }> = (props) => {
   return (
     <div class="help-page" onClick={props.hide}>
       <h2>Goal</h2>
-      <p>The goal is to type the hidden word before you run out of guesses.</p>
+      <p>
+        The goal is to guess the secret word. To make a guess simply type a
+        complete valid word and press enter. But be careful, you only have 6
+        guesses.
+      </p>
       <p>Use the results from the previous guesses to guide you.</p>
       <p>
         If a letter is green, that means it's correct and in the right location.
@@ -28,8 +32,8 @@ const HelpPage: Component<{ hide: any }> = (props) => {
       </p>
       <h2>Hint</h2>
       <p>
-        Try starting with common vowels like "e" and "a", and common consonants
-        like "s", "t" and "r".
+        Try starting with a word that contains regularly used vowels like "a"
+        and "e", and consonants like "s", "t" and "r".
       </p>
     </div>
   );

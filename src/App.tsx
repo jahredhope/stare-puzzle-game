@@ -3,7 +3,7 @@ import allowedWords from "./data/5-letter-allowed-words.json";
 import { Board } from "./Board";
 import { Keyboard } from "./Keyboard";
 import { createGameStore, getAnswer, Store } from "./store";
-import { createPulse } from "./utils";
+import { createPulse, getSuccessMessage } from "./utils";
 import { Header } from "./Header";
 
 function subscribeStoreToDocument(
@@ -77,9 +77,16 @@ const App: Component = () => {
     <div class="app">
       <Header />
       <Board store={store} shake={getShake()} />
-      {store.gameState === "won" ? <div>You won! Congratulations</div> : null}
+      {store.gameState === "won" ? (
+        <div>
+          You won! <em>{getSuccessMessage(store.guesses.length)}</em> (
+          {store.guesses.length} guesses)
+        </div>
+      ) : null}
       {store.gameState === "lost" ? (
-        <div>You lost. Better luck next time (Answer: {store.answer})</div>
+        <div>
+          You lost. <em>Better luck next time</em> (Answer: {store.answer})
+        </div>
       ) : null}
       {store.gameState !== "in-progress" ? (
         <div>Press enter to restart.</div>

@@ -37,11 +37,11 @@ export const Keyboard: Component<{
           {r.map((k) =>
             k === "E" ? (
               <div class="keyboard-enter" onClick={props.onEnter}>
-                Enter
+                ↵
               </div>
             ) : k === "B" ? (
               <div class="keyboard-back" onClick={props.onBack}>
-                Back
+                DEL
               </div>
             ) : (
               <div

@@ -28,7 +28,6 @@ export const Keyboard: Component<{
       })
     );
     setValue(knownValues);
-    console.log("Updating results", knownValues);
   });
 
   return (

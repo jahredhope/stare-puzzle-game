@@ -16,12 +16,10 @@ const App: Component = () => {
   }
   function onSubmit() {
     if (store.input.length !== store.length) {
-      console.log("Ignoring submit. Not complete");
       return;
     }
     const guess = store.input.join("");
     if (!allowedWords.includes(guess)) {
-      console.log("Word not in list");
       startShake();
       return;
     }
@@ -42,7 +40,6 @@ const App: Component = () => {
       return;
     }
     if (!key.match(/^[a-z]$/)) {
-      console.log("Invalid key. Ignoring.", key);
       return;
     }
     setStore("input", (s) => [...s, key]);
